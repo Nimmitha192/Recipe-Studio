@@ -1,6 +1,7 @@
 <script setup lang="ts">
 import { onMounted } from 'vue'
 import HeroSection from '@/components/HeroSection.vue'
+import RecipeCard from '@/components/RecipeCard.vue'
 import { useRecipesStore } from '@/stores/recipes'
 
 const recipesStore = useRecipesStore()
