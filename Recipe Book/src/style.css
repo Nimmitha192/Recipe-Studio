@@ -1,1 +1,46 @@
 @import "tailwindcss";
+
+@custom-variant dark (&:where(.dark, .dark *));
+
+/* Theme */
+:root {
+  color-scheme: light;
+}
+
+:root.dark {
+  color-scheme: dark;
+}
+
+/* Base font */
+body {
+  font-family: Inter, ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+}
+
+/* ✅ Wider container + more horizontal spacing */
+.container-shell {
+  @apply mx-auto w-full max-w-[1500px] px-6 sm:px-8 lg:px-12;
+}
+
+/* ✅ Card with better padding */
+.surface-card {
+  @apply rounded-3xl border border-white/60 bg-white/90 p-8 shadow-sm shadow-slate-200/60 backdrop-blur
+         dark:border-slate-800 dark:bg-slate-900/80 dark:shadow-black/20;
+}
+
+/* ✅ Tag pill slightly bigger */
+.tag-pill {
+  @apply inline-flex items-center rounded-full border border-emerald-200 bg-emerald-50 px-4 py-1.5 text-sm font-medium text-emerald-700
+         dark:border-emerald-900 dark:bg-emerald-950/60 dark:text-emerald-300;
+}
+
+/* ✅ Bigger, more comfortable buttons */
+.action-button {
+  @apply inline-flex items-center justify-center rounded-full px-6 py-3 text-sm font-semibold transition;
+}
+
+/* ✅ Section spacing (use in pages) */
+.section-space {
+  @apply py-12 sm:py-16 lg:py-20;
+}
+
+

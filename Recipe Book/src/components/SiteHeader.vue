@@ -3,9 +3,11 @@ import { computed, ref } from 'vue'
 import { RouterLink, useRoute } from 'vue-router'
 import { useBookmarksStore } from '@/stores/bookmarks'
 import { useSessionStore } from '@/stores/session'
+import { useTheme } from '@/composables/useTheme'
 
 const bookmarksStore = useBookmarksStore()
 const sessionStore = useSessionStore()
+const { isDark, toggleTheme } = useTheme()
 const route = useRoute()
 const isMenuOpen = ref(false)
 
@@ -50,6 +52,12 @@ const closeMenu = (): void => {
       </nav>
 
       <div class="hidden items-center gap-3 md:flex">
+      <button
+        class="action-button w-[100px] border border-slate-200 bg-white text-slate-700 hover:bg-slate-50 dark:border-slate-800 dark:bg-slate-900 dark:text-slate-200"
+        @click="toggleTheme"
+      >
+        {{ isDark ? 'Light' : 'Dark' }}
+      </button>
         <RouterLink
           to="/bookmarks"
           class="action-button bg-amber-400 text-slate-900 hover:bg-amber-300"
