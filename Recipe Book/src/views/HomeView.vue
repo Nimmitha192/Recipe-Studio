@@ -4,6 +4,7 @@ import HeroSection from '@/components/HeroSection.vue'
 import RecipeCard from '@/components/RecipeCard.vue'
 import { useRecipesStore } from '@/stores/recipes'
 
+
 const recipesStore = useRecipesStore()
 
 onMounted(async () => {
