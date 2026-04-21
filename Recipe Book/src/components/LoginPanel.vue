@@ -36,15 +36,14 @@ const handleSubmit = async (): Promise<void> => {
           Log in to keep your experience seamless across sessions with account-aware state and persistent access.
         </p>
 
+        <!-- ✅ Account Status (no logout button now) -->
         <div
           class="mt-8 rounded-[2rem] border border-slate-200 bg-white p-6 shadow-soft dark:border-slate-800 dark:bg-slate-900"
         >
-          <!-- ✅ changed text -->
           <p class="text-sm font-semibold uppercase tracking-[0.25em] text-slate-500">
             Account status
           </p>
 
-          <!-- ✅ changed wording -->
           <p class="mt-4 text-xl font-semibold text-slate-900 dark:text-white">
             {{
               sessionStore.isAuthenticated
@@ -52,22 +51,18 @@ const handleSubmit = async (): Promise<void> => {
                 : 'Not logged in'
             }}
           </p>
-
-          <button
-            v-if="sessionStore.isAuthenticated"
-            type="button"
-            class="mt-6 rounded-full border border-slate-300 px-5 py-3 text-sm font-semibold text-slate-700 dark:border-slate-700 dark:text-slate-200"
-            @click="sessionStore.logout"
-          >
-            Log out
-          </button>
         </div>
       </div>
 
       <div
         class="rounded-[2rem] border border-slate-200 bg-white p-8 shadow-soft dark:border-slate-800 dark:bg-slate-900"
       >
-        <form class="space-y-5" @submit.prevent="handleSubmit">
+        <!-- ✅ Show login form only when NOT logged in -->
+        <form
+          v-if="!sessionStore.isAuthenticated"
+          class="space-y-5"
+          @submit.prevent="handleSubmit"
+        >
           <div>
             <label for="username" class="mb-2 block text-sm font-medium text-slate-700 dark:text-slate-200">
               Username
@@ -113,6 +108,33 @@ const handleSubmit = async (): Promise<void> => {
             {{ sessionStore.loading ? 'Logging in...' : 'Log in' }}
           </button>
         </form>
+
+        <!-- ✅ Logged-in profile section (logout stays here) -->
+        <div v-else class="space-y-5">
+          <div class="flex items-center gap-4 rounded-3xl bg-slate-50 p-4 dark:bg-slate-800/70">
+            <img
+              :src="sessionStore.user?.avatar"
+              alt="Profile"
+              class="h-16 w-16 rounded-full object-cover"
+            />
+            <div>
+              <p class="text-lg font-semibold text-slate-900 dark:text-white">
+                {{ sessionStore.user?.name }}
+              </p>
+              <p class="text-sm text-slate-500 dark:text-slate-400">
+                {{ sessionStore.user?.email }}
+              </p>
+            </div>
+          </div>
+
+          <button
+            type="button"
+            class="w-full rounded-full bg-rose-500 px-6 py-4 text-sm font-semibold text-white transition hover:-translate-y-0.5 hover:bg-rose-400"
+            @click="sessionStore.logout"
+          >
+            Log out
+          </button>
+        </div>
       </div>
     </div>
   </section>
